@@ -1,0 +1,41 @@
+/* Default Styling for the whole Application. Like a nice font and smoother colors */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color scheme based on a blue hue */
+  --primary: #2196f3;
+  --primary-light: #6ec6ff;
+  --primary-dark: #0069c0;
+  --secondary: #ff9800;
+  --secondary-light: #ffc947;
+  --secondary-dark: #c66900;
+  --tertiary: #f44336;
+  --tertiary-light: #ff7961;
+  --tertiary-dark: #ba000d;
+  --background: #f5f5f5;
+  --surface: #fff;
+  --error: #f44336;
+  --black: #222;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background);
+  color: var(--black);
+}
+
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
