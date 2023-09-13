@@ -1,6 +1,10 @@
 <template>
   <article :class="{ checked: isChecked }" @click="toggleTodo(todo.id)">
-    <BaseButton @click.stop="removeTodo(todo.id)">Delete</BaseButton>
+    <div class="controls">
+      <BaseButton @click.stop="removeTodo(todo.id)" class="deleteBtn">
+        <font-awesome-icon icon="fa-regular fa-trash-can"/>
+      </BaseButton>
+    </div>
     <main>
       <h2>{{ todo.title }}</h2>
     </main>
@@ -108,4 +112,26 @@ input[type="checkbox"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteBtn {
+  padding: 12px;
+  font-size: 24px;
+  border-radius: 4px;
+  background: var(--primary);
+  color: var(--surface);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: var(--primary-dark);
+}
+
 </style>
