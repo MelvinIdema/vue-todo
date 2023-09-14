@@ -74,6 +74,11 @@ main {
   align-items: center;
 }
 
+.checked {
+  box-shadow: none;
+  opacity: 0.75;
+}
+
 .checked h2 {
   text-decoration: line-through;
   color: var(--secondary);
