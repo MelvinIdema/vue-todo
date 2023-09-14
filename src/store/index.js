@@ -1,4 +1,5 @@
 import {createStore} from "vuex";
+import todoItem from "@/components/TodoItem.vue";
 
 const localStoragePlugin = store => {
     let prevState = JSON.stringify(store.state.todoItems);
@@ -25,7 +26,9 @@ export default createStore({
             state.todoItems = [...todoItems];
         },
         addTodoItem(state, todoItem) {
-            state.todoItems.push(todoItem);
+            const checkedItems = state.todoItems.filter(todo => todo.checked);
+            const uncheckedItems = state.todoItems.filter(todo => !todo.checked);
+            state.todoItems = [...uncheckedItems, todoItem, ...checkedItems];
         },
         toggleTodoItem(state, id) {
             const todo = state.todoItems.find(todo => todo.id === id);
@@ -33,10 +36,14 @@ export default createStore({
 
             if (todo.checked) {
                 const todoItemsWithoutItem = state.todoItems.filter(todo => todo.id !== id);
-                state.todoItems = [...todoItemsWithoutItem, todo];
+                const checkedItems = todoItemsWithoutItem.filter(todo => todo.checked);
+                const uncheckedItems = todoItemsWithoutItem.filter(todo => !todo.checked);
+                state.todoItems = [...uncheckedItems, todo, ...checkedItems];
             } else {
                 const todoItemsWithoutItem = state.todoItems.filter(todo => todo.id !== id);
-                state.todoItems = [todo, ...todoItemsWithoutItem];
+                const checkedItems = todoItemsWithoutItem.filter(todo => todo.checked);
+                const uncheckedItems = todoItemsWithoutItem.filter(todo => !todo.checked);
+                state.todoItems = [...uncheckedItems, todo, ...checkedItems];
             }
         },
         removeTodoItem(state, id) {
