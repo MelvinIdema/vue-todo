@@ -16,7 +16,7 @@ const router = createRouter({
         {
             path: '/add',
             name: 'add',
-            component: () => import('@/views/CreateTodo.vue'),
+            component: () => import('@/components/CreateTodo.vue'),
             meta: {
                 title: 'Todo App - Add Todo'
             }

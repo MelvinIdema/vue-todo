@@ -1,4 +1,5 @@
 <template>
+  <CreateTodo />
   <draggable
       v-if="todoItems"
       v-model="todoItemsList"
@@ -19,12 +20,14 @@
 <script>
 import draggable from "vuedraggable";
 import TodoItem from "@/components/TodoItem.vue";
+import CreateTodo from "@/components/CreateTodo.vue";
 
 export default {
   name: "Overview",
   components: {
     TodoItem,
     draggable,
+    CreateTodo
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
   <article :class="{ checked: isChecked }" @click="toggleTodo">
     <div class="controls">
-      <BaseButton @click.stop="removeTodo" class="deleteBtn">
+      <BaseButton @click.stop="removeTodo" variant="icon">
         <font-awesome-icon icon="fa-regular fa-trash-can"/>
       </BaseButton>
     </div>
@@ -125,20 +125,6 @@ input[type="checkbox"]:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.deleteBtn {
-  padding: 12px;
-  font-size: 24px;
-  border-radius: 4px;
-  background: var(--primary);
-  color: var(--surface);
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.deleteBtn:hover {
-  background: var(--primary-dark);
 }
 
 </style>

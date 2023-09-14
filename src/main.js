@@ -8,9 +8,10 @@ import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faTrashCan);
+library.add(faPlusSquare);
 
 const app = createApp(App)
 

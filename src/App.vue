@@ -2,22 +2,19 @@
   <header>
     <h1>ToVue</h1>
   </header>
-  <nav>
-    <router-link to="/">Overview</router-link>
-    <router-link to="/add">Add Todo</router-link>
-  </nav>
   <main>
-    <router-view v-slot="slotProps">
-      <transition name="route" mode="out-in">
-        <component :is="slotProps.Component"/>
-      </transition>
-    </router-view>
+      <Overview />
   </main>
 </template>
 
 <script>
+import Overview from "@/views/Overview.vue";
+
 export default {
   name: 'App',
+  components: {
+    Overview
+  },
   computed() {
     return {
       todoItems: this.$store.getters.getTodoItems,
@@ -46,7 +43,6 @@ header {
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 24px;
-  margin-bottom: 16px;
 }
 
 main {

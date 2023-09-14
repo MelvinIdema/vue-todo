@@ -1,5 +1,4 @@
 import {createStore} from "vuex";
-import todoItem from "@/components/TodoItem.vue";
 
 const localStoragePlugin = store => {
     let prevState = JSON.stringify(store.state.todoItems);
