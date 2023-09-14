@@ -7,7 +7,11 @@
     <router-link to="/add">Add Todo</router-link>
   </nav>
   <main>
-    <router-view/>
+    <router-view v-slot="slotProps">
+      <transition name="route" mode="out-in">
+        <component :is="slotProps.Component" />
+      </transition>
+    </router-view>
   </main>
 </template>
 
@@ -111,5 +115,19 @@ nav a {
 
 nav a:hover {
   background: var(--primary-light);
+}
+
+nav a.router-link-active {
+  background: var(--primary-light);
+}
+
+.route-enter-active,
+.route-leave-active {
+  transition: opacity 0.2s;
+}
+
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
 }
 </style>
