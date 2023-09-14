@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .lists {
   display: grid;
-  grid-template-columns: 768px;
+  grid-template-columns: minmax(auto, 768px);
   grid-gap: 32px;
   margin: 0 32px;
   justify-content: space-around;

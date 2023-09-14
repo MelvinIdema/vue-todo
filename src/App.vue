@@ -44,9 +44,4 @@ header {
   color: white;
   padding: 24px;
 }
-
-main {
-  height: 100%;
-  width: 100%;
-}
 </style>
