@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>ToVue</h1>
+    <h1>ToFoe</h1>
   </header>
   <main>
       <Overview />
