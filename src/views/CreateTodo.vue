@@ -20,11 +20,10 @@ export default {
   components: {
     BaseButton,
   },
-  inject: ["createTodo"],
   methods: {
     saveTodo() {
       const title = this.$refs.titleInput.value;
-      this.createTodo({
+      this.$store.dispatch('addTodoItem', {
         title,
         checked: false,
         id: Math.random().toString(),

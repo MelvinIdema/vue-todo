@@ -9,71 +9,31 @@
   <main>
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">
-        <component :is="slotProps.Component" />
+        <component :is="slotProps.Component"/>
       </transition>
     </router-view>
   </main>
 </template>
 
 <script>
-import {computed} from "vue";
-
 export default {
   name: 'App',
-  data() {
+  computed() {
     return {
-      todoItems: [],
+      todoItems: this.$store.getters.getTodoItems,
     }
   },
   methods: {
-    createTodo(todo) {
-      this.todoItems.push(todo);
-    },
     toggleTodo(id) {
-      const todo = this.todoItems.find(todo => todo.id === id);
-      todo.checked = !todo.checked;
-
-      if (todo.checked) {
-        const todoItemsWithoutItem = this.todoItems.filter(todo => todo.id !== id);
-        this.todoItems = [...todoItemsWithoutItem, todo];
-      } else {
-        const todoItemsWithoutItem = this.todoItems.filter(todo => todo.id !== id);
-        this.todoItems = [todo, ...todoItemsWithoutItem];
-      }
-
+      this.$store.dispatch("toggleTodo", id);
     },
     removeTodo(id) {
-      console.log("removeTodo", id);
-      const index = this.todoItems.findIndex(todo => todo.id === id);
-      this.todoItems.splice(index, 1);
-    },
-    setTodoItems(todoItems) {
-      this.todoItems = todoItems;
+      this.$store.commit("removeTodo", id);
     }
   },
   mounted() {
-    const todoItems = localStorage.getItem("todoItems");
-    if (todoItems) {
-      this.todoItems = JSON.parse(todoItems);
-    }
-  },
-  watch: {
-    todoItems: {
-      handler(todoItems) {
-        localStorage.setItem("todoItems", JSON.stringify(todoItems));
-      },
-      deep: true
-    }
-  },
-  provide() {
-    return {
-      todoItems: computed(() => this.todoItems),
-      createTodo: this.createTodo,
-      toggleTodo: this.toggleTodo,
-      removeTodo: this.removeTodo,
-      setTodoItems: this.setTodoItems,
-    }
-  },
+    this.$store.dispatch("fetchTodoItems");
+  }
 }
 </script>
 

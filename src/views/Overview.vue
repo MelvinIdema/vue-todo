@@ -26,19 +26,21 @@ export default {
     TodoItem,
     draggable,
   },
-  inject: ["todoItems", "setTodoItems", "toggleTodo"],
   data() {
     return {
       drag: false
     }
   },
   computed: {
+    todoItems() {
+      return this.$store.getters.getTodoItems;
+    },
     todoItemsList: {
       get() {
-        return this.todoItems;
+        return this.$store.getters.getTodoItems;
       },
       set(value) {
-        this.setTodoItems(value);
+        this.$store.dispatch("setTodoItems", value);
       }
     }
   },

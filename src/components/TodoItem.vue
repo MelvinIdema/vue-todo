@@ -1,7 +1,7 @@
 <template>
-  <article :class="{ checked: isChecked }" @click="toggleTodo(todo.id)">
+  <article :class="{ checked: isChecked }" @click="toggleTodo">
     <div class="controls">
-      <BaseButton @click.stop="removeTodo(todo.id)" class="deleteBtn">
+      <BaseButton @click.stop="removeTodo" class="deleteBtn">
         <font-awesome-icon icon="fa-regular fa-trash-can"/>
       </BaseButton>
     </div>
@@ -38,12 +38,19 @@ export default {
       }
     }
   },
-  inject: ["removeTodo", "toggleTodo"],
   computed: {
     isChecked() {
       return this.todo.checked;
     }
   },
+  methods: {
+    toggleTodo() {
+      this.$store.dispatch('toggleTodoItem', this.todo.id);
+    },
+    removeTodo() {
+      this.$store.dispatch('removeTodoItem', this.todo.id);
+    }
+  }
 }
 </script>
 
