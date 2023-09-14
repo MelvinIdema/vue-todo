@@ -1,15 +1,18 @@
-import {createStore} from "vuex";
+import { createStore } from 'vuex'
+import { useFirestore } from 'vuefire'
+import { doc, setDoc, getDoc } from 'firebase/firestore'
 
-const localStoragePlugin = store => {
-    let prevState = JSON.stringify(store.state.todoItems);
+const collection = import.meta.env.DEV ? "todos-dev" : "todos";
 
-    store.subscribe((mutation, state) => {
-        if (prevState === state.todoItems) return;
-        const nextState = JSON.stringify(state.todoItems);
-        localStorage.setItem("todoItems", nextState);
-        prevState = nextState;
+const firestorePlugin = store => {
+    const db = useFirestore();
+    store.subscribe(async (mutation, state) => {
+        await setDoc(doc(db, collection, "todoItems"), {
+            todoItems: state.todoItems
+        });
     });
 };
+
 
 export default createStore({
     state: {
@@ -63,12 +66,16 @@ export default createStore({
         removeTodoItem({commit}, todoItemId) {
             commit("removeTodoItem", todoItemId);
         },
-        fetchTodoItems() {
-            const todoItems = localStorage.getItem("todoItems");
-            if (todoItems) {
-                this.commit("setTodoItems", JSON.parse(todoItems));
+        async fetchTodoItems() {
+            const db = await useFirestore();
+            const docRef = await doc(db, collection, "todoItems");
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const todoItems = docSnap.data().todoItems;
+                this.commit("setTodoItems", todoItems);
             }
         }
     },
-    plugins: [localStoragePlugin]
+    plugins: [firestorePlugin]
 });

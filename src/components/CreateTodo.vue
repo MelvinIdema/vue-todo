@@ -27,6 +27,7 @@ export default {
         checked: false,
         id: Math.random().toString(),
       });
+      this.$refs.titleInput.$el.value = '';
     },
   },
 }
